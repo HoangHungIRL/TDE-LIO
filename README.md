@@ -151,9 +151,9 @@ Comparison between:
 
 This project is developed based on the following excellent open-source works. We sincerely thank the authors for making their code publicly available:
 
-* **LIO-SAM**: [https://github.com/TixiaoShan/LIO-SAM](https://github.com/TixiaoShan/LIO-SAM)
-* **D-LIO**: [https://github.com/vectr-ucla/direct_lidar_inertial_odometry](https://github.com/vectr-ucla/direct_lidar_inertial_odometry)
-* **ESKF IMU Attitude Estimation**: [https://github.com/HoangHungIRL/IMU_filter_IRL_ROS2/tree/ROS-Noetic](https://github.com/HoangHungIRL/IMU_filter_IRL_ROS2/tree/ROS-Noetic)
+* [**LIO-SAM**](https://github.com/TixiaoShan/LIO-SAM)
+* [**D-LIO**](https://github.com/vectr-ucla/direct_lidar_inertial_odometry)
+* [**ESKF IMU Attitude Estimation**](https://github.com/HoangHungIRL/IMU_filter_IRL_ROS2/tree/ROS-Noetic)
 
 ---
 
