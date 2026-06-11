@@ -101,31 +101,9 @@ rosbag play your_dataset.bag
 
 The proposed framework consists of four major modules:
 
-```text
-Raw IMU
-    │
-    ▼
-TDE Disturbance Estimation
-    │
-    ▼
-Disturbance & Uncertainty Model
-    │
-    ▼
-ESKF State Update
-    │
-    ▼
-IMU Compensation
-    │
-    ├─────────────► IMU Preintegration
-    │
-    └─────────────► LiDAR Motion Compensation
-                     │
-                     ▼
-             LiDAR Odometry
-                     │
-                     ▼
-                  Mapping
-```
+<p align="center">
+  <img src="./doc/architecture.jpg" width="70%">
+</p>
 
 ---
 
