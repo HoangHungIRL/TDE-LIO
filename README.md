@@ -52,12 +52,6 @@ The framework operates seamlessly using only:
 * 3D LiDAR
 * IMU
 
-No additional legged sensors or kinematics are required:
-* Joint encoders
-* Leg kinematics
-* Foot force sensors
-* Tactile sensors
-
 ---
 
 ## Prerequisites
