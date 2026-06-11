@@ -99,10 +99,10 @@ rosbag play your_dataset.bag
 
 ## Method Overview
 
-The proposed framework consists of four major modules:
+The proposed framework architecture:
 
 <p align="center">
-  <img src="./doc/architecture.jpg" width="70%">
+  <img src="./doc/architecture.jpg" width="60%">
 </p>
 
 ---
