@@ -1,0 +1,18 @@
+<launch>
+
+    <arg name="project" default="tde_lio"/>
+    
+    <rosparam file="$(find tde_lio)/config/params.yaml" command="load" />
+
+    <include file="$(find tde_lio)/launch/include/module_loam.launch" />
+
+    <include file="$(find tde_lio)/launch/include/module_robot_state_publisher.launch" />
+
+    <include file="$(find tde_lio)/launch/include/module_navsat.launch" />
+
+    <include file="$(find tde_lio)/launch/include/module_rviz.launch" />
+
+    <node pkg="tde_lio" type="imu_eskf_node" name="imu_eskf_node" output="screen">
+        </node>
+
+</launch>
