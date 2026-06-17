@@ -274,7 +274,7 @@
 
     <h2>News</h2>
     <ul class="news-list">
-      <li><strong>2026.06.xx:</strong> Source code officially released.</li>
+      <li><strong>2026.06.xx:</strong> Source code released.</li>
       <li><strong>2026.02.18:</strong> Paper accepted by IEEE Robotics and Automation Letters (RA-L 2026).</li>
     </ul>
 
@@ -289,7 +289,7 @@
         title="TDE-LIO Quadruped Robot Odometry Demonstration Video"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowfullscreen>
-       iframe>
+      </iframe>
     </div>
 
     <h2>Key Features</h2>
@@ -298,11 +298,16 @@
       <li><strong>TDE-Aware ESKF:</strong> The IMU orientation and disturbance uncertainty model are jointly updated within an Error-State Kalman Filter.</li>
       <li><strong>Vibration-Robust IMU Preintegration:</strong> The compensated IMU measurements significantly reduce vibration-induced degradation in inertial state estimation.</li>
       <li><strong>Improved LiDAR Motion Compensation:</strong> The refined inertial pose estimation improves LiDAR deskewing and odometry accuracy.</li>
-      <li><strong>Fully LiDAR-IMU Based:</strong> The system operates seamlessly using only a 3D LiDAR and an IMU without requiring leg kinematics or foot contact sensors.</li>
+      <li><strong>Fully LiDAR-IMU Based:</strong> The framework operates seamlessly using only:
+        <ul>
+            <li>3D LiDAR</li>
+            <li>IMU</li>
+        </ul>
+      </li>
     </ul>
 
     <h2>Method Overview</h2>
-    <p>The system architecture below illustrates the pipeline integrating the proposed TDE framework within the tightly-coupled estimation process:</p>
+    <p>The proposed framework architecture:</p>
     <div class="figure">
       <img src="./doc/architecture.jpg" alt="TDE-LIO Framework System Architecture Diagram">
       <div class="caption">Figure 1: Complete software architecture of the proposed TDE-LIO framework.</div>
@@ -311,17 +316,16 @@
     <h2>Experimental Platform</h2>
     <div class="flex-row">
       <div class="flex-col-text">
-        <h3>Robot Platform & Sensors</h3>
+        <h3>Robot Platform</h3>
         <ul>
-          <li><strong>Base Robot:</strong> Unitree Go2 Quadruped Robot</li>
-          <li><strong>Sensors Integrated:</strong> High-rate 3D LiDAR and onboard IMU</li>
+          <li>Unitree Go2</li>
         </ul>
         <h3>Validation Scenarios</h3>
-        <p>The framework has been thoroughly benchmarked across demanding deployment spaces:</p>
         <ul>
-          <li>Structured indoor & wide outdoor environments</li>
-          <li>High-speed dynamic locomotion regimes</li>
-          <li>Severe physical vibration configurations</li>
+          <li>Indoor environments</li>
+          <li>Outdoor environments</li>
+          <li>Dynamic locomotion</li>
+          <li>Severe vibration conditions</li>
         </ul>
       </div>
       <div class="flex-col-img">
@@ -330,39 +334,21 @@
       </div>
     </div>
 
-    <h2>Prerequisites & Installation</h2>
-    <p>The framework was tested on <code>Ubuntu 20.04</code> running <code>ROS Noetic</code>.</p>
-    
-    <h3>1. Install GTSAM Core Dependency</h3>
-    <pre><code>sudo add-apt-repository ppa:borglab/gtsam-release-4.0
-sudo apt update
-sudo apt install libgtsam-dev libgtsam-unstable-dev</code></pre>
-
-    <h3>2. Build from Source</h3>
-    <p>Clone the package into your active catkin workspace directory:</p>
-    <pre><code>cd ~/catkin_ws/src
-git clone https://github.com/HoangHungIRL/TDE-LIO.git
-cd ..
-catkin_make</code></pre>
-
-    <h3>3. Execution</h3>
-    <p>Launch the state estimator nodes:</p>
-    <pre><code>source devel/setup.bash
-roslaunch tde_lio run.launch</code></pre>
-    <p>Play back your recorded experimental dataset rosbag in a separate terminal shell:</p>
-    <pre><code>rosbag play your_dataset.bag</code></pre>
-
     <h2>Experimental Results</h2>
     
     <h3>Mapping Performance</h3>
-    <p>The proposed method significantly improves mapping quality by neutralizing severe vibration effects, preserving sharp environmental features and eliminating geometric drift.</p>
+    <p>The proposed method significantly improves mapping quality by reducing vibration-induced degradation, resulting in more consistent and geometrically accurate maps during quadruped locomotion.</p>
     <div class="figure">
       <img src="./doc/mapping.jpg" alt="TDE-LIO Pointcloud Mapping Evaluation Quality Results">
       <div class="caption">Figure 2: Qualitative 3D point cloud map comparison showing consistency improvements.</div>
     </div>
 
-    <h3>Trajectory Tracking Accuracy</h3>
-    <p>Estimated trajectory profiles outline substantial improvements compared to standard baselines without external disturbance compensation modules:</p>
+    <h3>Trajectory Comparison</h3>
+    <p>Comparison between:</p>
+    <ul>
+        <li>LIO w/o TDE Compensation</li>
+        <li>TDE-LIO</li>
+    </ul>
     <div class="figure">
       <img src="./doc/odometry.jpg" alt="Estimated Trajectory Drift Comparison Curve Plot">
       <div class="caption">Figure 3: Odometry drift curve trajectories (LIO vs. TDE-LIO).</div>
@@ -370,7 +356,7 @@ roslaunch tde_lio run.launch</code></pre>
 
     <h2>Acknowledgments</h2>
     <p>
-      Our framework is developed upon valuable open-source baselines. We extend our gratitude to the authors of:
+      This project is developed based on the following excellent open-source works. We sincerely thank the authors for making their code publicly available:
     </p>
     <ul>
       <li><a href="https://github.com/TixiaoShan/LIO-SAM" target="_blank">LIO-SAM</a></li>
@@ -379,7 +365,7 @@ roslaunch tde_lio run.launch</code></pre>
     </ul>
 
     <h2>Citation</h2>
-    <p>If you find this research workspace or codebase valuable for your academic projects, please cite our RA-L paper publication:</p>
+    <p>If you find this work or code useful in your research, please consider citing our RA-L paper:</p>
     <pre><code>@ARTICLE{TDE-LIO,
   author={Hoang, Quoc Hung and Kim, Gon-Woo},
   journal={IEEE Robotics and Automation Letters},
@@ -393,12 +379,11 @@ roslaunch tde_lio run.launch</code></pre>
 
     <h2>Contact</h2>
     <p>
-      For technical discussions, reporting bugs, or exploring collaboration opportunities, feel free to reach out:
+      For any questions, bugs, or collaborations, feel free to reach out or open an issue on this GitHub repository:
     </p>
     <ul>
       <li><strong>Author:</strong> Quoc Hung Hoang</li>
       <li><strong>Email:</strong> <a href="mailto:hoanghung21301580@gmail.com">hoanghung21301580@gmail.com</a></li>
-      <li>Or open a tracking issue tickets directly on the official project repository.</li>
     </ul>
 
   </main>
@@ -409,8 +394,8 @@ roslaunch tde_lio run.launch</code></pre>
       const thumbnail = document.getElementById("video-thumbnail");
       const playButton = document.querySelector(".play-button");
 
-      // Replace the placeholder below with your real YouTube embed address extension when uploaded
-      iframe.src = "https://www.youtube.com/embed/YOUR_YOUTUBE_VIDEO_ID_HERE?autoplay=1";
+      // Cập nhật ID video youtube từ file README (KeZjIlM-DQw)
+      iframe.src = "https://www.youtube.com/embed/KeZjIlM-DQw?autoplay=1";
 
       thumbnail.style.display = "none";
       playButton.style.display = "none";
