@@ -2,7 +2,7 @@
 <h2 align="center">External Disturbance Compensation for LiDAR-Inertial Odometry under Vibration Conditions on Quadruped Robots</h2>
 
 <p align="center">
-  <a href="#">
+  <a href="https://youtu.be/KeZjIlM-DQw">
     <img src="https://img.shields.io/badge/Video-Youtube-blue" />
   </a>
   <a href="https://ieeexplore.ieee.org/document/11397344">
