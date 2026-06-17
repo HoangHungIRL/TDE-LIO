@@ -126,11 +126,11 @@
       padding-bottom: 56.25%; /* 16:9 ratio */
       height: 0;
       overflow: hidden;
-      max-width: 100%;
+      max-width: 900px;
       background: #000;
       border-radius: 12px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-      margin: 40px auto;
+      margin: 20px auto 40px;
     }
 
     .video-container iframe {
@@ -142,35 +142,43 @@
       border: 0;
     }
 
-    /* --- Features Grid --- */
+    /* --- Features Grid (3 Items) --- */
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
       margin-top: 40px;
     }
 
     .feature-card {
       background: white;
-      padding: 30px;
+      padding: 30px 25px;
       border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.05);
       border-top: 4px solid var(--accent-color);
       transition: transform 0.3s ease;
+      text-align: center;
     }
 
     .feature-card:hover {
       transform: translateY(-5px);
     }
 
+    .feature-card .icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      display: block;
+    }
+
     .feature-card h5 {
-      font-size: 1.25rem;
+      font-size: 1.15rem;
       color: var(--primary-color);
       margin: 0 0 15px 0;
+      line-height: 1.4;
     }
 
     .feature-card p {
-      font-size: 1rem;
+      font-size: 0.95rem;
       text-align: left;
       margin: 0;
       color: var(--text-muted);
@@ -193,18 +201,26 @@
       font-size: 0.95rem;
       color: var(--text-muted);
       font-style: italic;
+      text-align: center;
     }
 
     /* --- Two Column Layout --- */
     .split-layout {
       display: flex;
       align-items: center;
-      gap: 50px;
+      gap: 40px;
+      margin-bottom: 40px;
     }
 
-    .split-text { flex: 1; }
+    .split-text { flex: 1.2; }
     .split-img { flex: 0.8; text-align: center; }
     
+    .split-img img {
+      max-width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
     /* --- Terminal Code Block --- */
     .terminal {
       background: #1e1e1e;
@@ -231,14 +247,15 @@
       border-left: 5px solid #ffc107;
       padding: 15px 20px;
       border-radius: 4px;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
     }
     
     .news-banner ul { margin: 0; padding-left: 20px; }
     .news-banner li { color: #856404; font-weight: 500; margin-bottom: 5px; }
 
     /* Responsive */
-    @media (max-width: 768px) {
+    @media (max-width: 900px) {
+      .features-grid { grid-template-columns: 1fr; }
       .split-layout { flex-direction: column; }
       .banner h1 { font-size: 2.2rem; }
     }
@@ -259,7 +276,7 @@
     </div>
   </header>
 
-  <section class="container">
+  <section class="container" style="padding-bottom: 20px;">
     <div class="news-banner">
       <ul>
         <li><strong>2026.06.xx:</strong> Source code is now publicly available!</li>
@@ -267,118 +284,139 @@
       </ul>
     </div>
 
-    <h3>Project Overview</h3>
-    <p>
-      <strong>TDE-LIO</strong> is a tightly-coupled LiDAR-Inertial Odometry framework specifically engineered for quadruped robots. While conventional LIO systems assume smooth trajectories and clean inertial data, legged robots introduce brutal realities: repetitive foot-ground impacts, severe vibrations, and fluctuating motion profiles.
-    </p>
-    <p>
-      These inherent disturbances corrupt IMU measurements, leading to degraded preintegration and inaccurate LiDAR motion deskewing. <strong>TDE-LIO</strong> solves this by introducing a Time Delay Estimation (TDE) framework to model and compensate for these unknown external disturbances in real-time, feeding refined states into an Error-State Kalman Filter (ESKF) for highly robust odometry.
-    </p>
-
-    <div class="video-container">
-      <iframe src="https://www.youtube.com/embed/KeZjIlM-DQw?autoplay=0&rel=0" title="TDE-LIO Demonstration" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <div class="split-layout">
+      <div class="split-text">
+        <h3 style="text-align: left; margin-bottom: 20px;">Project Overview</h3>
+        <p>
+          <strong>TDE-LIO</strong> is a tightly-coupled LiDAR-Inertial Odometry framework specifically engineered for quadruped robots. While conventional LIO systems assume smooth trajectories and clean inertial data, legged locomotion introduces severe vulnerabilities: repetitive foot-ground impacts, intense physical vibrations, and highly fluctuating motion profiles.
+        </p>
+        <p>
+          These inherent disturbances corrupt IMU measurements, leading to degraded preintegration and inaccurate LiDAR motion deskewing. <strong>TDE-LIO</strong> effectively mitigates these issues by proposing a novel external disturbance compensation mechanism, enabling highly robust and drift-free state estimation under dynamic locomotion.
+        </p>
+      </div>
+      <div class="split-img">
+        <img src="doc/TDE-LIO.gif" alt="TDE-LIO Real-time Demonstration GIF">
+        <div class="caption">Real-time TDE-LIO Performance</div>
+      </div>
     </div>
   </section>
 
   <section class="alt-bg">
     <div class="container">
-      <h3>Core Technical Contributions</h3>
-      <div class="features-grid">
-        <div class="feature-card">
-          <h5>⏱️ External Disturbance Modeling</h5>
-          <p>Leverages a Time Delay Estimation (TDE) mechanism to accurately characterize and quantify unknown, high-frequency disturbances acting on the IMU during quadruped locomotion.</p>
-        </div>
-        <div class="feature-card">
-          <h5>🧮 TDE-Aware ESKF</h5>
-          <p>Innovatively updates both the IMU orientation and the disturbance uncertainty model jointly within an Error-State Kalman Filter, ensuring mathematically rigorous state estimation.</p>
-        </div>
-        <div class="feature-card">
-          <h5>🛡️ Vibration-Robust Preintegration</h5>
-          <p>By pre-compensating IMU measurements before integration, the framework drastically reduces drift and degradation typically caused by foot-contact vibrations.</p>
-        </div>
-        <div class="feature-card">
-          <h5>🎯 Enhanced LiDAR Deskewing</h5>
-          <p>Refined, high-fidelity inertial pose estimation directly translates to superior LiDAR point cloud motion compensation, preserving sharp geometric features.</p>
-        </div>
+      <h3>Full Video Demonstration</h3>
+      <p style="text-align: center; color: var(--text-muted); margin-bottom: 30px;">
+        Comprehensive evaluation of the TDE-LIO framework in structured indoor, wide outdoor, and highly dynamic vibration scenarios.
+      </p>
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/KeZjIlM-DQw?autoplay=0&rel=0" title="TDE-LIO Demonstration" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
     </div>
   </section>
 
   <section class="container">
-    <h3>System Architecture</h3>
-    <p>
-      The pipeline operates entirely on exteroceptive and proprioceptive sensing (a 3D LiDAR and an IMU), eliminating the need for complex leg kinematics or external foot contact sensors. The diagram below illustrates how the TDE module intercepts and refines IMU streams before they reach the main mapping backend.
-    </p>
-    <div class="figure-box">
-      <img src="./doc/architecture.jpg" alt="TDE-LIO System Architecture">
-      <div class="caption">Figure 1: Complete software architecture of the proposed tightly-coupled TDE-LIO framework.</div>
+    <h3>Core Technical Contributions</h3>
+    <div class="features-grid">
+      
+      <div class="feature-card">
+        <span class="icon">📈</span>
+        <h5>External Disturbance Modeling via Time Delay Estimation</h5>
+        <p>Analytically quantifies and models high-frequency, unknown physical disturbances acting on the IMU during dynamic quadruped locomotion by leveraging a mathematically rigorous TDE framework.</p>
+      </div>
+      
+      <div class="feature-card">
+        <span class="icon">📐</span>
+        <h5>Robust IMU Preintegration based on ESKF</h5>
+        <p>Jointly updates the IMU orientation and the estimated disturbance uncertainty model within an Error-State Kalman Filter, effectively neutralizing vibration-induced drift prior to inertial integration.</p>
+      </div>
+      
+      <div class="feature-card">
+        <span class="icon">📡</span>
+        <h5>Enhanced LiDAR Deskewing & Motion Compensation</h5>
+        <p>Exploits the refined, high-fidelity inertial pose estimations to accurately deskew sequential LiDAR sweeps, inherently preserving sharp geometric features and preventing environmental map blurring.</p>
+      </div>
+
     </div>
   </section>
 
   <section class="alt-bg">
     <div class="container">
-      <div class="split-layout">
-        <div class="split-text">
-          <h3>Experimental Validation</h3>
-          <p>We comprehensively benchmarked the framework using the <strong>Unitree Go2</strong> quadruped platform.</p>
-          <p>The robot was deployed across demanding scenarios, including structured indoor corridors, wide outdoor environments, high-speed dynamic locomotion, and regimes specifically designed to induce severe physical vibrations.</p>
-          
-          <h4>Mapping & Trajectory Quality</h4>
-          <p>Compared to standard LIO baselines that lack disturbance compensation, TDE-LIO demonstrates noticeably smoother trajectory tracking and produces highly consistent, geometrically accurate point cloud maps, entirely suppressing the "blurring" effect caused by vibrations.</p>
-        </div>
-        <div class="split-img">
-          <img src="./doc/quadruped.jpg" alt="Unitree Go2 Quadruped Robot" style="border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.15); max-width: 100%;">
-          <div class="caption" style="margin-top: 10px;">Hardware Setup: Unitree Go2</div>
-        </div>
-      </div>
-
-      <div class="features-grid" style="grid-template-columns: 1fr 1fr; margin-top: 50px;">
-        <div class="figure-box" style="margin: 0;">
-          <img src="./doc/mapping.jpg" alt="Mapping Performance">
-          <div class="caption">Figure 2: 3D Mapping quality comparison.</div>
-        </div>
-        <div class="figure-box" style="margin: 0;">
-          <img src="./doc/odometry.jpg" alt="Odometry Trajectories">
-          <div class="caption">Figure 3: Odometry drift curve (LIO vs. TDE-LIO).</div>
-        </div>
+      <h3>System Architecture</h3>
+      <p>
+        The proposed pipeline operates entirely on exteroceptive and proprioceptive sensing (a 3D LiDAR and an onboard IMU), eliminating the dependency on complex leg kinematics or external foot-contact sensors. The diagram below illustrates how the TDE module intercepts and refines raw IMU streams before integrating them into the main mapping backend.
+      </p>
+      <div class="figure-box">
+        <img src="./doc/architecture.jpg" alt="TDE-LIO System Architecture">
+        <div class="caption">Figure 1: Complete software architecture of the tightly-coupled TDE-LIO framework.</div>
       </div>
     </div>
   </section>
 
   <section class="container">
-    <h3>Getting Started</h3>
-    <p>The system is built and tested natively on <code>Ubuntu 20.04</code> with <code>ROS Noetic</code>.</p>
-    
-    <h4>1. Install Dependencies</h4>
-    <div class="terminal">
+    <div class="split-layout" style="align-items: flex-start;">
+      <div class="split-text">
+        <h3 style="text-align: left;">Experimental Validation</h3>
+        <p>We comprehensively benchmarked the framework utilizing the <strong>Unitree Go2</strong> quadruped platform equipped with a high-rate 3D LiDAR.</p>
+        <p>The system was rigorously evaluated across a spectrum of demanding deployment scenarios, including:</p>
+        <ul style="margin-bottom: 20px; color: var(--text-muted);">
+          <li>Structured indoor corridors & wide outdoor environments.</li>
+          <li>High-speed dynamic locomotion regimes.</li>
+          <li>Severe, mechanically induced vibration configurations.</li>
+        </ul>
+        <p>Compared to standard LIO baselines lacking external disturbance compensation, <strong>TDE-LIO</strong> demonstrates noticeably smoother trajectory tracking and produces highly consistent, geometrically accurate point cloud maps—entirely suppressing the "blurring" or "ghosting" effects typically caused by foot-impact vibrations.</p>
+      </div>
+      <div class="split-img" style="margin-top: 15px;">
+        <img src="./doc/quadruped.jpg" alt="Unitree Go2 Quadruped Robot">
+        <div class="caption" style="margin-top: 10px;">Hardware Setup: Unitree Go2</div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 30px; margin-top: 30px;">
+      <div class="figure-box" style="flex: 1; min-width: 300px; margin: 0;">
+        <img src="./doc/mapping.jpg" alt="Mapping Performance">
+        <div class="caption">Figure 2: 3D Mapping quality consistency comparison.</div>
+      </div>
+      <div class="figure-box" style="flex: 1; min-width: 300px; margin: 0;">
+        <img src="./doc/odometry.jpg" alt="Odometry Trajectories">
+        <div class="caption">Figure 3: Odometry drift curve trajectories (LIO vs. TDE-LIO).</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt-bg">
+    <div class="container">
+      <h3>Getting Started</h3>
+      <p>The system is built and tested natively on <code>Ubuntu 20.04</code> running <code>ROS Noetic</code>.</p>
+      
+      <h4>1. Install Dependencies</h4>
+      <div class="terminal">
 <pre><span class="cmd">sudo</span> add-apt-repository ppa:borglab/gtsam-release-4.0
 <span class="cmd">sudo</span> apt update
 <span class="cmd">sudo</span> apt install <span class="arg">libgtsam-dev libgtsam-unstable-dev</span></pre>
-    </div>
+      </div>
 
-    <h4>2. Build the Workspace</h4>
-    <div class="terminal">
+      <h4>2. Build the Workspace</h4>
+      <div class="terminal">
 <pre><span class="cmd">cd</span> ~/catkin_ws/src
 <span class="cmd">git</span> clone https://github.com/HoangHungIRL/TDE-LIO.git
 <span class="cmd">cd</span> ..
 <span class="cmd">catkin_make</span></pre>
-    </div>
+      </div>
 
-    <h4>3. Run the Estimator</h4>
-    <div class="terminal">
+      <h4>3. Run the Estimator</h4>
+      <div class="terminal">
 <pre><span class="cmd">source</span> devel/setup.bash
 <span class="cmd">roslaunch</span> tde_lio run.launch
 
 <span class="cmd"># In a new terminal tab:</span>
 <span class="cmd">rosbag</span> play your_dataset.bag</pre>
+      </div>
     </div>
   </section>
 
-  <section class="alt-bg">
-    <div class="container">
-      <h3>Citation & Contact</h3>
-      <p>If you utilize this framework in your academic research, we kindly request you to cite our paper:</p>
-      <div class="terminal" style="background: #f8f9fa; border: 1px solid #ddd; box-shadow: none;">
+  <section class="container">
+    <h3>Citation & Contact</h3>
+    <p>If you utilize this framework or codebase in your academic research, we kindly request you to cite our paper:</p>
+    <div class="terminal" style="background: #f8f9fa; border: 1px solid #ddd; box-shadow: none;">
 <pre style="color: #333; font-family: monospace;">@ARTICLE{TDE-LIO,
   author={Hoang, Quoc Hung and Kim, Gon-Woo},
   journal={IEEE Robotics and Automation Letters},
@@ -389,19 +427,18 @@
   pages={4713-4720},
   doi={10.1109/LRA.2026.3665313}
 }</pre>
-      </div>
-
-      <p style="margin-top: 30px;">
-        <strong>Acknowledgments:</strong> This work builds upon excellent open-source projects including 
-        <a href="https://github.com/TixiaoShan/LIO-SAM" target="_blank" style="color: var(--accent-color);">LIO-SAM</a>, 
-        <a href="https://github.com/vectr-ucla/direct_lidar_inertial_odometry" target="_blank" style="color: var(--accent-color);">D-LIO</a>, and 
-        <a href="https://github.com/HoangHungIRL/IMU_filter_IRL_ROS2/tree/ROS-Noetic" target="_blank" style="color: var(--accent-color);">ESKF IMU Attitude Estimation</a>.
-      </p>
-
-      <p>
-        <strong>Contact:</strong> Quoc Hung Hoang (<a href="mailto:hoanghung21301580@gmail.com" style="color: var(--accent-color);">hoanghung21301580@gmail.com</a>). For bugs or discussions, please open an issue on the GitHub repository.
-      </p>
     </div>
+
+    <p style="margin-top: 30px;">
+      <strong>Acknowledgments:</strong> This work builds upon excellent open-source projects including 
+      <a href="https://github.com/TixiaoShan/LIO-SAM" target="_blank" style="color: var(--accent-color);">LIO-SAM</a>, 
+      <a href="https://github.com/vectr-ucla/direct_lidar_inertial_odometry" target="_blank" style="color: var(--accent-color);">D-LIO</a>, and 
+      <a href="https://github.com/HoangHungIRL/IMU_filter_IRL_ROS2/tree/ROS-Noetic" target="_blank" style="color: var(--accent-color);">ESKF IMU Attitude Estimation</a>.
+    </p>
+
+    <p>
+      <strong>Contact:</strong> Quoc Hung Hoang (<a href="mailto:hoanghung21301580@gmail.com" style="color: var(--accent-color);">hoanghung21301580@gmail.com</a>). For technical discussions or reporting bugs, please open an issue ticket on the official GitHub repository.
+    </p>
   </section>
 
 </body>
