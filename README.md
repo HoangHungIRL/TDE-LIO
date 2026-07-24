@@ -28,7 +28,7 @@ To address this challenge, TDE-LIO introduces an external disturbance estimation
 ---
 
 ## News
-* **2026.06.xx**: Source code released.
+* **2026.06.30**: Source code released.
 * **2026.02.18**: Paper accepted by IEEE Robotics and Automation Letters (RA-L 2026).
 
 ---
